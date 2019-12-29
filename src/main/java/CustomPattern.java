@@ -19,7 +19,10 @@ public class CustomPattern {
         List<CtElement> elements = classes.get(0).getMethodsByName("main").get(0).getElements(new TypeFilter<>(CtElement.class));
         System.out.println(elements.get(0));
         for (CtElement v : elements) {
+            // todo: only set ints
             if (v instanceof CtLiteral) {
+
+                // the transformation
                 ((CtLiteral) v).setValue(5);
             }
         }

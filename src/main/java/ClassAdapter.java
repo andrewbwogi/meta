@@ -2,7 +2,6 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-
 class ClassAdapter extends ClassVisitor implements Opcodes {
     private static final String TRANSFORM_METHOD_NAME = "main";
     private static final String TRANSFORM_METHOD_DESC = "([Ljava/lang/String;)V";
@@ -15,12 +14,10 @@ class ClassAdapter extends ClassVisitor implements Opcodes {
     public MethodVisitor visitMethod(final int access, final String name,
                                      final String desc, final String signature, final String[] exceptions) {
         MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
-
         if(name.equals(TRANSFORM_METHOD_NAME)
                 && desc.equals(TRANSFORM_METHOD_DESC)) {
             return new MethodAdapter(mv);
         }
-
-        return mv == null ? null : new MethodAdapter(mv);
+        return mv;
     }
 }
